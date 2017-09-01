@@ -3,8 +3,22 @@
 # Links conf files into place in $HOME as well as a bin directory
 # Will automatically delete old symlinks. Will not delete directories or files though
 
+platform="$(uname)"
+if [ "$platform" == 'Darwin' ]; then
+  READLINK="$(which greadlink)"
+elif [ "$platform" == "Linux" ]; then
+  READLINK="$(which readlink)"
+else
+  echo "Cannot determine plaform"
+  exit 1
+fi
 
-CMD="$(readlink -f "$0")"
+if [ ! -f "$READLINK" ]; then
+  echo "Please install coreutils"
+  exit 1
+fi
+
+CMD="$($READLINK -f "$0")"
 BASE="$(dirname "$CMD")"
 CONFS="confs"
 
