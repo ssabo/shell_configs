@@ -5,17 +5,17 @@
 
 platform="$(uname)"
 if [ "$platform" == 'Darwin' ]; then
-  READLINK="$(which greadlink)"
+    READLINK="$(which greadlink)"
 elif [ "$platform" == "Linux" ]; then
-  READLINK="$(which readlink)"
+    READLINK="$(which readlink)"
 else
-  echo "Cannot determine plaform"
-  exit 1
+    echo "Cannot determine plaform"
+    exit 1
 fi
 
 if [ ! -f "$READLINK" ]; then
-  echo "Please install coreutils"
-  exit 1
+    echo "Please install coreutils"
+    exit 1
 fi
 
 CMD="$($READLINK -f "$0")"
@@ -32,20 +32,20 @@ ln -s "$BASE/bin" "$HOME/bin"
 
 # Link conf files
 find "$CONFS" -type f | while read -r conf_file; do
-  # Location to link the file to relative to $HOME
-  LINK_LOC="${conf_file#confs/}"
+    # Location to link the file to relative to $HOME
+    LINK_LOC="${conf_file#confs/}"
 
-  test -L "$HOME/$LINK_LOC" && rm "$HOME/$LINK_LOC"
+    test -L "$HOME/$LINK_LOC" && rm "$HOME/$LINK_LOC"
 
-  echo ln -s "$BASE/$conf_file" "$HOME/$LINK_LOC"
-  ln -s "$BASE/$conf_file" "$HOME/$LINK_LOC"
+    echo ln -s "$BASE/$conf_file" "$HOME/$LINK_LOC"
+    ln -s "$BASE/$conf_file" "$HOME/$LINK_LOC"
 
 done
 
 if [ ! -e "$HOME/.vim/bundle/Vundle.vim" ]; then
-  echo "Installing Vundle"
-  mkdir -p "$HOME/.vim/bundle"a
-  pushd "$HOME/.vim/bundle"
-  git clone git@github.com:ssabo/shell_configs.git
-  popd
+    echo "Installing Vundle"
+    mkdir -p "$HOME/.vim/bundle"a
+    pushd "$HOME/.vim/bundle"
+    git clone git@github.com:ssabo/shell_configs.git
+    popd
 fi
