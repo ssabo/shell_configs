@@ -23,7 +23,7 @@ BASE="$(dirname "$CMD")"
 CONFS="confs"
 
 # Do work relative to base dir
-cd "$BASE"
+cd "$BASE" || exit 1
 
 # Link $HOME/bin
 test -L "$HOME/bin" && rm "$HOME/bin"
@@ -31,7 +31,7 @@ echo ln -s "$BASE/bin" "$HOME/bin"
 ln -s "$BASE/bin" "$HOME/bin"
 
 # Link conf files
-find "$CONFS" -type f | while read conf_file; do
+find "$CONFS" -type f | while read -r conf_file; do
   # Location to link the file to relative to $HOME
   LINK_LOC="${conf_file#confs/}"
 
@@ -41,3 +41,11 @@ find "$CONFS" -type f | while read conf_file; do
   ln -s "$BASE/$conf_file" "$HOME/$LINK_LOC"
 
 done
+
+if [ ! -e "$HOME/.vim/bundle/Vundle.vim" ]; then
+  echo "Installing Vundle"
+  mkdir -p "$HOME/.vim/bundle"a
+  pushd "$HOME/.vim/bundle"
+  git clone git@github.com:ssabo/shell_configs.git
+  popd
+fi
