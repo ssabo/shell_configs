@@ -1,3 +1,4 @@
+set backspace=2
 set nocompatible              " required
 filetype off                  " required
 
