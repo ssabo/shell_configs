@@ -28,7 +28,6 @@ indent_size = 4
 [*.php]
 indent_style = tab
 indent_size = 4
-#trim_trailing_whitespace = true
 
 [*.py]
 indent_style = space
@@ -38,6 +37,10 @@ indent_size = 4
 indent_style = tab
 indent_size = 4
 
+[*.sh.erb]
+indent_style = space
+indent_size = 4
+
 [*.sh]
 indent_style = space
 indent_size = 4
@@ -45,3 +48,4 @@ indent_size = 4
 [*.go]
 indent_size = 4
 indent_style = tab
+
