@@ -44,7 +44,7 @@ done
 
 if [ ! -e "$HOME/.vim/bundle/Vundle.vim" ]; then
     echo "Installing Vundle"
-    mkdir -p "$HOME/.vim/bundle"a
+    mkdir -p "$HOME/.vim/bundle"
     pushd "$HOME/.vim/bundle"
     git clone https://github.com/VundleVim/Vundle.vim.git
     popd
